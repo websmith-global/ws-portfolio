@@ -6,8 +6,13 @@ import { join, sep } from 'path';
 const BUILD_DIRECTORY = 'dist';
 const PRODUCTION = process.env.NODE_ENV === 'production';
 
+// Types of entry points
+const PAGE_FILES = readdirSync('src/pages')
+  .filter((filename) => filename.endsWith('.ts'))
+  .map((filename) => './src/pages/'.concat(filename));
+
 // Config entrypoint files
-const ENTRY_POINTS = ['src/index.ts'];
+const ENTRY_POINTS = ['./src/global.ts', ...PAGE_FILES];
 
 // Config dev serving
 const LIVE_RELOAD = !PRODUCTION;
